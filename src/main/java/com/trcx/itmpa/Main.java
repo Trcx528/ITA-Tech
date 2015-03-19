@@ -1,10 +1,14 @@
-package com.trcx.ita_tech;
+package com.trcx.itmpa;
 
+import com.trcx.itmpa.Common.Blocks.BlockArmorFormer;
+import com.trcx.itmpa.Common.CommonProxy;
+import com.trcx.itmpa.Common.TileEntities.TEArmorFormer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import net.minecraft.block.Block;
 
 /**
  * Created by Trcx on 3/18/2015.
@@ -16,8 +20,8 @@ public class Main {
     @Mod.Instance(Main.Constants.modid)
     public static Main INSTANCE;
 
-    @SidedProxy(clientSide = "com.trcx.ita_tech.Client.Proxy", serverSide = "com.trcx.ita_tech.Common.Proxy")
-    public static com.trcx.ita_tech.Common.Proxy proxy;
+    @SidedProxy(clientSide = "com.trcx.itmpa.Client.ClientProxy", serverSide = "com.trcx.itmpa.Common.CommonProxy")
+    public static CommonProxy proxy;
 
 
     public static class Items {
@@ -25,7 +29,7 @@ public class Main {
     }
 
     public static class Blocks {
-
+        public static Block ArmorFormer;
     }
 
     public static class Config {
@@ -33,19 +37,21 @@ public class Main {
     }
 
     public static class Constants {
-        public static final String modid = "ITA-Tech";
+        public static final String modid = "itmpa";
         public static final String version = "0.0.1";
-        public static final String modFriendlyName = "Infinitely Tweakable Armor - Tech Edition";
+        public static final String modFriendlyName = "Infinitely Tweakable Modular Power Armor";
+
+        public static final String nameArmorFormer = "ArmorFormer";
+
+        public static final String invNameArmorFormer = "Armor Former";
     }
-
-
 
 
     public Main (){}
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        //register stuff
+        Blocks.ArmorFormer = new BlockArmorFormer(Constants.nameArmorFormer, TEArmorFormer.class);
     }
 
     @Mod.EventHandler
