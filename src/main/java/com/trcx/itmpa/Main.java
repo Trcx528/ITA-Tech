@@ -2,12 +2,14 @@ package com.trcx.itmpa;
 
 import com.trcx.itmpa.Common.Blocks.BlockArmorFormer;
 import com.trcx.itmpa.Common.CommonProxy;
+import com.trcx.itmpa.Common.GuiHandler;
 import com.trcx.itmpa.Common.TileEntities.TEArmorFormer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 
 /**
@@ -52,6 +54,8 @@ public class Main {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Blocks.ArmorFormer = new BlockArmorFormer(Constants.nameArmorFormer, TEArmorFormer.class);
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     }
 
     @Mod.EventHandler

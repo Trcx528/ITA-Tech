@@ -6,8 +6,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 /**
  * Created by Trcx on 3/18/2015.
@@ -16,10 +19,18 @@ public class BlockBase extends BlockContainer {
     private final Class<? extends BaseTE> teClass;
     private final String name;
 
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        ArrayList<ItemStack> returnStacks = new ArrayList<ItemStack>();
+
+        return super.getDrops(world, x, y, z, metadata, fortune);
+    }
+
     protected BlockBase(String name, Class<? extends BaseTE> teClass, Material mat) {
         super(mat);
         this.teClass = teClass;
         this.name = name;
+        setBlockName(name);
         setHardness(0.5F);
         setHarvestLevel("pickaxe",0);
         GameRegistry.registerBlock(this, name);
@@ -47,9 +58,7 @@ public class BlockBase extends BlockContainer {
     public TileEntity createNewTileEntity(World world, int meta) {
         if (teClass != null) {
             try {
-                TileEntity retTE = teClass.newInstance();
-
-                return retTE;
+                return teClass.newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }

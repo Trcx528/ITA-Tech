@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by Trcx on 3/19/2015.
@@ -14,6 +15,11 @@ public class ContainerBase extends Container {
     public ContainerBase(InventoryPlayer invPlayer, BaseTE te){
         bindTileInventory(te);
         bindPlayerInventory(invPlayer);
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+        return null;
     }
 
     private void bindTileInventory(BaseTE te){
