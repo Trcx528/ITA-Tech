@@ -18,7 +18,7 @@ public class BlockArmorFormer extends BlockBase {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int sideId, float clickX, float clickY, float clickZ) {
-        System.out.println("x: " + x + " y: " + y + " z: " + z + " sideId: " + sideId + " cX: "+ clickX + " cY: " + clickY + " cZ: " + clickZ);
+        //System.out.println("x: " + x + " y: " + y + " z: " + z + " sideId: " + sideId + " cX: "+ clickX + " cY: " + clickY + " cZ: " + clickZ);
         if (!world.isRemote){
             player.openGui(Main.INSTANCE,0, world,x,y,z);
         }

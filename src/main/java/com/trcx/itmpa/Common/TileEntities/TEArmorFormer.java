@@ -31,6 +31,21 @@ public class TEArmorFormer extends BaseTE implements ISidedInventory, IEnergyHan
     }
 
     @Override
+    public boolean isDoingWork() {
+        return false;
+    }
+
+    @Override
+    public boolean workFinished() {
+        return false;
+    }
+
+    @Override
+    public int workFinishTime() {
+        return 0;
+    }
+
+    @Override
     public void updateEntity() {
         //System.out.println("Ticking!");
     }

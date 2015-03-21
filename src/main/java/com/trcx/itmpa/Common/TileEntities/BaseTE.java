@@ -12,9 +12,23 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * Created by Trcx on 3/18/2015.
  */
-public class BaseTE extends TileEntity implements IInventory {
+public abstract class BaseTE extends TileEntity implements IInventory {
     private ItemStack[] inventoryContents;
     private String invName;
+    private int workingTicks = 0;
+
+    public abstract boolean isDoingWork();
+    public abstract boolean workFinished();
+    public abstract int workFinishTime();
+
+    @Override
+    public void updateEntity() {
+        if (isDoingWork())
+            workingTicks ++;
+        if (workingTicks >= workFinishTime())
+            if (workFinished())
+                workingTicks = 0;
+    }
 
     BaseTE(int invSize, String invName){
         inventoryContents = new ItemStack[invSize];
@@ -65,7 +79,6 @@ public class BaseTE extends TileEntity implements IInventory {
     }
 
     //region inventory stuff
-
     @Override
     public int getSizeInventory() {
         return inventoryContents.length;
@@ -142,5 +155,5 @@ public class BaseTE extends TileEntity implements IInventory {
     public boolean isItemValidForSlot(int slotId, ItemStack stack) {
         return true;
     }
-    //end region
+//endregion
 }

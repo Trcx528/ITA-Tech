@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -18,13 +19,6 @@ import java.util.ArrayList;
 public class BlockBase extends BlockContainer {
     private final Class<? extends BaseTE> teClass;
     private final String name;
-
-    @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> returnStacks = new ArrayList<ItemStack>();
-
-        return super.getDrops(world, x, y, z, metadata, fortune);
-    }
 
     protected BlockBase(String name, Class<? extends BaseTE> teClass, Material mat) {
         super(mat);
