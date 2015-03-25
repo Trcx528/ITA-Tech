@@ -46,6 +46,11 @@ public class Main {
         public static final String nameArmorFormer = "ArmorFormer";
 
         public static final String invNameArmorFormer = "Armor Former";
+
+        public static final int typeHELMET = 0;
+        public static final int typeCHESTPLATE = 1;
+        public static final int typeLEGGINGS = 2;
+        public static final int typeBOOTS = 3;
     }
 
 

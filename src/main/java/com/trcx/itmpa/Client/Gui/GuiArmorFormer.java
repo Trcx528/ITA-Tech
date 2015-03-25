@@ -16,9 +16,16 @@ public class GuiArmorFormer extends GuiContainer {
     }
 
     @Override
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+    }
+
+    @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+        GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(guiBackground);
+        ySize = 176;
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);

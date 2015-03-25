@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -15,20 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 public abstract class BaseTE extends TileEntity implements IInventory {
     private ItemStack[] inventoryContents;
     private String invName;
-    private int workingTicks = 0;
-
-    public abstract boolean isDoingWork();
-    public abstract boolean workFinished();
-    public abstract int workFinishTime();
-
-    @Override
-    public void updateEntity() {
-        if (isDoingWork())
-            workingTicks ++;
-        if (workingTicks >= workFinishTime())
-            if (workFinished())
-                workingTicks = 0;
-    }
+    public int frontSide;
 
     BaseTE(int invSize, String invName){
         inventoryContents = new ItemStack[invSize];
@@ -43,8 +31,15 @@ public abstract class BaseTE extends TileEntity implements IInventory {
     }
 
     @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        readFromNBT(pkt.func_148857_g());
+    }
+
+    @Override
     public void readFromNBT(NBTTagCompound tag) {
+
         super.readFromNBT(tag);
+        frontSide = tag.getInteger("side");
         int slotsCount = 0;
         if (tag.hasKey("size")) {
             slotsCount = tag.getInteger("size");
@@ -64,6 +59,7 @@ public abstract class BaseTE extends TileEntity implements IInventory {
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
+        tag.setInteger("side",frontSide);
         tag.setInteger("size", getSizeInventory());
         NBTTagList nbttaglist = new NBTTagList();
         for (int i = 0; i < inventoryContents.length; i++) {

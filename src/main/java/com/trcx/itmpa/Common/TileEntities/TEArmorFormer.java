@@ -13,6 +13,9 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class TEArmorFormer extends BaseTE implements ISidedInventory, IEnergyHandler{
     private EnergyStorage rfStorage = new EnergyStorage(32000);
+    private static final int requiredTicks = 1200;  // 1 minute
+    private static final int inputOneRequired = 8;  // ender pearls
+    private static final int inputTwoRequired = 32; // redstone
 
     public TEArmorFormer() {
         super(4, Main.Constants.invNameArmorFormer);
@@ -31,23 +34,8 @@ public class TEArmorFormer extends BaseTE implements ISidedInventory, IEnergyHan
     }
 
     @Override
-    public boolean isDoingWork() {
-        return false;
-    }
-
-    @Override
-    public boolean workFinished() {
-        return false;
-    }
-
-    @Override
-    public int workFinishTime() {
-        return 0;
-    }
-
-    @Override
     public void updateEntity() {
-        //System.out.println("Ticking!");
+
     }
 
     @Override
